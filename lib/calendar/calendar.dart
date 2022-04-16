@@ -139,7 +139,7 @@ class CalendarScreen extends StatelessWidget {
             ),
           );
         }
-
+        print(snapshot.error);
         return const Scaffold(
           body: Center(
             child: Text('Calendar error!'),
