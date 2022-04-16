@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 var appTheme = ThemeData(
   // fontFamily: GoogleFonts.nunito().fontFamily,
-  // bottomAppBarTheme: const BottomAppBarTheme(
-  //   color: Colors.black87,
+  // bottomAppBarTheme: BottomAppBarTheme(
+  //   color: Colors.blue.shade100,
   // ),
   // brightness: Brightness.dark,
   // textTheme: const TextTheme(
@@ -17,17 +17,23 @@ var appTheme = ThemeData(
   //   headline1: TextStyle(fontWeight: FontWeight.bold),
   //   subtitle1: TextStyle(color: Colors.grey),
   // ),
-  scaffoldBackgroundColor: Colors.brown[50],
+  scaffoldBackgroundColor: Colors.indigo[50],
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.all(20),
-      primary: Colors.lightBlue[900],
+      primary: Colors.blue[700],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50),
       ),
     ),
   ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.blue[700],
+  ),
   // buttonTheme: const ButtonThemeData(buttonColor: Colors.pink),
-  appBarTheme: AppBarTheme(backgroundColor: Colors.lightBlue[900]),
+  appBarTheme: AppBarTheme(backgroundColor: Colors.blue[700]),
   brightness: Brightness.light,
+  // bottomNavigationBarTheme: BottomNavigationBar(
+  //   items: [BottomNa],
+  // ),
 );

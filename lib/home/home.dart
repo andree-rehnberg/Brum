@@ -18,31 +18,30 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "appBar": AppBar(
         title: const Text("Brum"),
-        bottom: const TabBar(
-          tabs: [
-            Tab(
-              icon: FaIcon(
-                FontAwesomeIcons.calendar,
-                size: 18,
-              ),
-              text: 'Kalender',
-            ),
-            Tab(
-              icon: FaIcon(
-                FontAwesomeIcons.list,
-                size: 18,
-              ),
-              text: 'Agenda',
-            ),
-          ],
-        ),
+        // bottom: const TabBar(
+        //   tabs: [
+        //     // Tab(
+        //     //   icon: FaIcon(
+        //     //     FontAwesomeIcons.calendar,
+        //     //     size: 18,
+        //     //   ),
+        //     //   text: 'Kalender',
+        //     // ),
+        //     Tab(
+        //       icon: FaIcon(
+        //         FontAwesomeIcons.list,
+        //         size: 18,
+        //       ),
+        //       text: 'Agenda',
+        //     ),
+        //   ],
+        // ),
       ),
       "body": const CalendarScreen(),
       "floatingActionButton": FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
         },
-        backgroundColor: Colors.lightBlue[900],
         child: const FaIcon(FontAwesomeIcons.calendarPlus, size: 22),
       ),
     },
@@ -55,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           // Add your onPressed code here!
         },
-        backgroundColor: Colors.lightBlue[900],
         // child: Icon(Icons.add),
         child: const FaIcon(FontAwesomeIcons.stickyNote, size: 22),
       ),

@@ -16,40 +16,40 @@ class BottomNavBar extends StatelessWidget {
     var user = AuthService().user;
 
     return BottomNavigationBar(
-      fixedColor: Colors.lightBlue[900],
+      fixedColor: Colors.white,
       selectedLabelStyle: const TextStyle(
         color: Colors.black,
       ),
-      unselectedItemColor: Colors.grey[600],
+      unselectedItemColor: Colors.blueGrey[200],
       currentIndex: selectedIndex,
       type: BottomNavigationBarType.shifting,
       items: [
-        const BottomNavigationBarItem(
-          icon: Icon(
+        BottomNavigationBarItem(
+          icon: const Icon(
             FontAwesomeIcons.car,
             size: 20,
           ),
           label: 'Bokningar',
-          backgroundColor: Colors.white,
-          activeIcon: Icon(
+          backgroundColor: Colors.blue[700],
+          activeIcon: const Icon(
             FontAwesomeIcons.carCrash,
           ),
         ),
-        const BottomNavigationBarItem(
-          icon: Icon(
+        BottomNavigationBarItem(
+          icon: const Icon(
             FontAwesomeIcons.stickyNote,
             size: 20,
           ),
           label: 'Anteckningar',
-          backgroundColor: Colors.white,
-          activeIcon: Icon(
+          backgroundColor: Colors.blue[700],
+          activeIcon: const Icon(
             FontAwesomeIcons.solidStickyNote,
           ),
         ),
         BottomNavigationBarItem(
           icon: GoogleProfilePicture(url: user!.photoURL!),
           label: 'Profil',
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue[700],
         ),
       ],
       onTap: (int idx) {
