@@ -1,8 +1,8 @@
-import 'package:googleapis/admin/directory_v1.dart';
 import "package:googleapis_auth/auth_io.dart";
 import 'package:googleapis/calendar/v3.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 Future<ServiceAccountCredentials> loadServiceAccountCredentials() async {
   final String jsonString =
@@ -29,13 +29,18 @@ class GoogleCalendarService {
       CalendarApi.calendarReadonlyScope
     ];
 
+    print(await FlutterNativeTimezone.getLocalTimezone()); // Europe/Moscow
     AuthClient client =
         await clientViaServiceAccount(_accountCredentials, _scopes);
+
+    String localTimeZone = await FlutterNativeTimezone.getLocalTimezone();
 
     CalendarApi calendar = CalendarApi(client);
     Events calendarEvents = await calendar.events.list(
         "msjf71eo0hbhjc72ggj0pv1390@group.calendar.google.com",
-        timeMin: DateTime.now()
+        timeMin: DateTime.now(),
+        timeZone: localTimeZone
+
         // timeMin: DateTime.now()
         //     .subtract(
         //       const Duration(days: 4),
