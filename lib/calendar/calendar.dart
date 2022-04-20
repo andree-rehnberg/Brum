@@ -69,113 +69,117 @@ class CalendarScreen extends StatelessWidget {
                         )
                       : ListView(
                           shrinkWrap: true,
-                          children: calendarEvents.map(
-                            (event) {
-                              String startDate = event.start?.date != null
-                                  ? DateFormat.MMMEd('sv_SE').format(
-                                      event.start!.date!.toLocal(),
-                                    )
-                                  : DateFormat.MMMEd('sv_SE').format(
-                                      event.start!.dateTime!.toLocal(),
-                                    );
+                          children: [
+                            ...calendarEvents.map(
+                              (event) {
+                                String startDate = event.start?.date != null
+                                    ? DateFormat.MMMEd('sv_SE').format(
+                                        event.start!.date!.toLocal(),
+                                      )
+                                    : DateFormat.MMMEd('sv_SE').format(
+                                        event.start!.dateTime!.toLocal(),
+                                      );
 
-                              String endDate = event.end!.date != null
-                                  ? DateFormat.MMMEd('sv_SE').format(
-                                      event.end!.date!.toLocal().subtract(
-                                            const Duration(days: 1),
-                                          ),
-                                    )
-                                  : DateFormat.MMMEd('sv_SE').format(
-                                      event.end!.dateTime!.toLocal(),
-                                    );
+                                String endDate = event.end!.date != null
+                                    ? DateFormat.MMMEd('sv_SE').format(
+                                        event.end!.date!.toLocal().subtract(
+                                              const Duration(days: 1),
+                                            ),
+                                      )
+                                    : DateFormat.MMMEd('sv_SE').format(
+                                        event.end!.dateTime!.toLocal(),
+                                      );
 
-                              var startTime = event.start!.dateTime != null
-                                  ? DateFormat.Hm().format(
-                                      event.start!.dateTime!.toLocal(),
-                                    )
-                                  : null;
+                                var startTime = event.start!.dateTime != null
+                                    ? DateFormat.Hm().format(
+                                        event.start!.dateTime!.toLocal(),
+                                      )
+                                    : null;
 
-                              var endTime = event.end!.dateTime != null
-                                  ? DateFormat.Hm().format(
-                                      event.end!.dateTime!.toLocal(),
-                                    )
-                                  : null;
+                                var endTime = event.end!.dateTime != null
+                                    ? DateFormat.Hm().format(
+                                        event.end!.dateTime!.toLocal(),
+                                      )
+                                    : null;
 
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                child: Card(
-                                  child: InkWell(
-                                    onTap: () => {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 8,
-                                                ),
-                                                child: Text(
-                                                  event.summary!,
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                  child: Card(
+                                    child: InkWell(
+                                      onTap: () => {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    bottom: 8,
+                                                  ),
+                                                  child: Text(
+                                                    event.summary!,
+                                                    style: const TextStyle(
+                                                      fontSize: 20,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 8),
-                                                child: Icon(
-                                                  Icons.calendar_month,
-                                                  size: 20,
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 8),
+                                                  child: Icon(
+                                                    Icons.calendar_month,
+                                                    size: 20,
+                                                  ),
                                                 ),
-                                              ),
-                                              Text(
-                                                startDate != endDate
-                                                    ? '$startDate - $endDate'
-                                                    : startDate,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 4,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 8),
-                                                child: Icon(
-                                                  Icons.access_time,
-                                                  size: 20,
+                                                Text(
+                                                  startDate != endDate
+                                                      ? '$startDate - $endDate'
+                                                      : startDate,
                                                 ),
-                                              ),
-                                              Text(
-                                                startTime != null ||
-                                                        endTime != null
-                                                    ? '$startTime - $endTime'
-                                                    : 'Heldagsbrum!',
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 8),
+                                                  child: Icon(
+                                                    Icons.access_time,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  startTime != null ||
+                                                          endTime != null
+                                                      ? '$startTime - $endTime'
+                                                      : 'Heldagsbrum!',
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          ).toList(),
+                                );
+                              },
+                            ).toList(),
+                            const SizedBox(height: 20),
+                          ],
                         ),
                 ),
               ),
