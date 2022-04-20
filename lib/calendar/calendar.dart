@@ -2,16 +2,16 @@ import 'package:brum/services/gcal.dart';
 import 'package:brum/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:googleapis/calendar/v3.dart' as GCal;
-import 'package:googleapis_auth/auth_io.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting('sv');
+    initializeDateFormatting('sv_SE', null);
     return FutureBuilder<GCal.Events>(
       future: GoogleCalendarService().getCalendarEvents(),
       builder: (context, snapshot) {
@@ -37,7 +37,7 @@ class CalendarScreen extends StatelessWidget {
                 const Expanded(
                   flex: 1,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 40, 0, 20),
+                    padding: EdgeInsets.fromLTRB(0, 60, 0, 20),
                     child: Text(
                       'Kommande turer',
                       style: TextStyle(fontSize: 30),
@@ -72,33 +72,35 @@ class CalendarScreen extends StatelessWidget {
                             shrinkWrap: true,
                             children: calendarEvents.map(
                               (event) {
-                                var startDay = event.start?.dateTime != null
-                                    ? DateFormat.MMMEd('sv_SE')
-                                        .format(event.start!.dateTime!)
-                                    : DateFormat.MMMEd('sv_SE')
-                                        .format(event.start!.date!);
-                                var endDay = event.end?.dateTime != null
+                                String startDate = event.start?.date != null
                                     ? DateFormat.MMMEd('sv_SE').format(
-                                        event.end!.dateTime!.subtract(
-                                          const Duration(days: 1),
-                                        ),
+                                        event.start!.date!.toLocal(),
                                       )
                                     : DateFormat.MMMEd('sv_SE').format(
-                                        event.end!.date!.subtract(
-                                          const Duration(days: 1),
-                                        ),
+                                        event.start!.dateTime!.toLocal(),
                                       );
 
-                                var startDateTimeString = event
-                                            .start?.dateTime !=
-                                        null
-                                    ? '$startDay | ${DateFormat.Hm().format(event.start!.dateTime!)} - '
-                                    : '$startDay - ';
-                                var endDateTimeString =
-                                    event.end?.dateTime != null
-                                        ? DateFormat.Hm()
-                                            .format(event.end!.dateTime!)
-                                        : endDay;
+                                String endDate = event.end!.date != null
+                                    ? DateFormat.MMMEd('sv_SE').format(
+                                        event.end!.date!.toLocal().subtract(
+                                              const Duration(days: 1),
+                                            ),
+                                      )
+                                    : DateFormat.MMMEd('sv_SE').format(
+                                        event.end!.dateTime!.toLocal(),
+                                      );
+
+                                var startTime = event.start!.dateTime != null
+                                    ? DateFormat.Hm().format(
+                                        event.start!.dateTime!.toLocal(),
+                                      )
+                                    : null;
+
+                                var endTime = event.end!.dateTime != null
+                                    ? DateFormat.Hm().format(
+                                        event.end!.dateTime!.toLocal(),
+                                      )
+                                    : null;
 
                                 return Card(
                                   child: InkWell(
@@ -109,22 +111,61 @@ class CalendarScreen extends StatelessWidget {
                                         children: [
                                           Row(
                                             children: [
-                                              Text(
-                                                event.summary!,
-                                                style: const TextStyle(
-                                                  fontSize: 18,
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 8,
+                                                ),
+                                                child: Text(
+                                                  event.summary!,
+                                                  style: const TextStyle(
+                                                    fontSize: 20,
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          Row(children: [
-                                            Text(
-                                              startDateTimeString,
-                                            ),
-                                            Text(
-                                              endDateTimeString,
-                                            )
-                                          ])
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 8),
+                                                child: Icon(
+                                                  Icons.calendar_month,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                              Text(
+                                                startDate != endDate
+                                                    ? '$startDate - $endDate'
+                                                    : startDate,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 8),
+                                                child: Icon(
+                                                  Icons.access_time,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                              Text(
+                                                startTime != null ||
+                                                        endTime != null
+                                                    ? '$startTime - $endTime'
+                                                    : 'Heldagsbrum!',
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -139,7 +180,7 @@ class CalendarScreen extends StatelessWidget {
             ),
           );
         }
-        print(snapshot.error);
+
         return const Scaffold(
           body: Center(
             child: Text('Calendar error!'),

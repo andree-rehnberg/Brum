@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: _screens[_selectedIndex]["appBar"],
+        // appBar: _screens[_selectedIndex]["appBar"],
         body: _screens[_selectedIndex]["body"],
         bottomNavigationBar: BottomNavBar(
           onItemTapped: _onItemTapped,

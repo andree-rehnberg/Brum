@@ -13,14 +13,6 @@ Future<ServiceAccountCredentials> loadServiceAccountCredentials() async {
 
 // Use service account credentials to get an authenticated and auto refreshing client.
 class GoogleCalendarService {
-  // static final _accountCredentials =
-  //     ServiceAccountCredentials.fromJson(loadServiceAccountJson());
-
-  // static final _scopes = [
-  //   CalendarApi.calendarEventsScope,
-  //   CalendarApi.calendarReadonlyScope
-  // ];
-
   Future<Events> getCalendarEvents() async {
     final _accountCredentials = await loadServiceAccountCredentials();
 
@@ -29,7 +21,6 @@ class GoogleCalendarService {
       CalendarApi.calendarReadonlyScope
     ];
 
-    print(await FlutterNativeTimezone.getLocalTimezone()); // Europe/Moscow
     AuthClient client =
         await clientViaServiceAccount(_accountCredentials, _scopes);
 
@@ -37,23 +28,10 @@ class GoogleCalendarService {
 
     CalendarApi calendar = CalendarApi(client);
     Events calendarEvents = await calendar.events.list(
-        "msjf71eo0hbhjc72ggj0pv1390@group.calendar.google.com",
-        timeMin: DateTime.now(),
-        timeZone: localTimeZone
-
-        // timeMin: DateTime.now()
-        //     .subtract(
-        //       const Duration(days: 4),
-        //     )
-        //     .toUtc(),
-        // timeMax: DateTime.now()
-        //     .add(
-        //       const Duration(days: 5),
-        //     )
-        //     .toUtc(),
-        // singleEvents: true,
-        // orderBy: 'starttime',
-        );
+      "msjf71eo0hbhjc72ggj0pv1390@group.calendar.google.com",
+      timeMin: DateTime.now(),
+      timeZone: localTimeZone,
+    );
 
     return calendarEvents;
   }
