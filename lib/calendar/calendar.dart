@@ -29,80 +29,82 @@ class CalendarScreen extends StatelessWidget {
         if (snapshot.hasData && !snapshot.hasError) {
           var calendarEvents = snapshot.data!.items!;
 
-          return Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 60, 0, 20),
-                    child: Text(
-                      'Kommande turer',
-                      style: TextStyle(fontSize: 30),
-                    ),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
+                  child: Text(
+                    'Kommande turer',
+                    style: TextStyle(fontSize: 30),
                   ),
                 ),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    child: calendarEvents.isEmpty
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(bottom: 16.0),
-                                child: Text(
-                                  '😱',
-                                  style: TextStyle(fontSize: 60),
-                                ),
+              ),
+              Expanded(
+                flex: 5,
+                child: Container(
+                  child: calendarEvents.isEmpty
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 16.0),
+                              child: Text(
+                                '😱',
+                                style: TextStyle(fontSize: 60),
                               ),
-                              Text(
-                                'Inga turer på g!',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey[600],
-                                ),
+                            ),
+                            Text(
+                              'Inga turer på g!',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.grey[600],
                               ),
-                            ],
-                          )
-                        : ListView(
-                            shrinkWrap: true,
-                            children: calendarEvents.map(
-                              (event) {
-                                String startDate = event.start?.date != null
-                                    ? DateFormat.MMMEd('sv_SE').format(
-                                        event.start!.date!.toLocal(),
-                                      )
-                                    : DateFormat.MMMEd('sv_SE').format(
-                                        event.start!.dateTime!.toLocal(),
-                                      );
+                            ),
+                          ],
+                        )
+                      : ListView(
+                          shrinkWrap: true,
+                          children: calendarEvents.map(
+                            (event) {
+                              String startDate = event.start?.date != null
+                                  ? DateFormat.MMMEd('sv_SE').format(
+                                      event.start!.date!.toLocal(),
+                                    )
+                                  : DateFormat.MMMEd('sv_SE').format(
+                                      event.start!.dateTime!.toLocal(),
+                                    );
 
-                                String endDate = event.end!.date != null
-                                    ? DateFormat.MMMEd('sv_SE').format(
-                                        event.end!.date!.toLocal().subtract(
-                                              const Duration(days: 1),
-                                            ),
-                                      )
-                                    : DateFormat.MMMEd('sv_SE').format(
-                                        event.end!.dateTime!.toLocal(),
-                                      );
+                              String endDate = event.end!.date != null
+                                  ? DateFormat.MMMEd('sv_SE').format(
+                                      event.end!.date!.toLocal().subtract(
+                                            const Duration(days: 1),
+                                          ),
+                                    )
+                                  : DateFormat.MMMEd('sv_SE').format(
+                                      event.end!.dateTime!.toLocal(),
+                                    );
 
-                                var startTime = event.start!.dateTime != null
-                                    ? DateFormat.Hm().format(
-                                        event.start!.dateTime!.toLocal(),
-                                      )
-                                    : null;
+                              var startTime = event.start!.dateTime != null
+                                  ? DateFormat.Hm().format(
+                                      event.start!.dateTime!.toLocal(),
+                                    )
+                                  : null;
 
-                                var endTime = event.end!.dateTime != null
-                                    ? DateFormat.Hm().format(
-                                        event.end!.dateTime!.toLocal(),
-                                      )
-                                    : null;
+                              var endTime = event.end!.dateTime != null
+                                  ? DateFormat.Hm().format(
+                                      event.end!.dateTime!.toLocal(),
+                                    )
+                                  : null;
 
-                                return Card(
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: Card(
                                   child: InkWell(
                                     onTap: () => {},
                                     child: Padding(
@@ -170,14 +172,14 @@ class CalendarScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            ).toList(),
-                          ),
-                  ),
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
 
