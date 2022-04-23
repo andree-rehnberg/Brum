@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:brum/home/home.dart';
-
 import '../services/auth.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -22,32 +20,51 @@ class BottomNavBar extends StatelessWidget {
       ),
       unselectedItemColor: Colors.blueGrey[200],
       currentIndex: selectedIndex,
+      backgroundColor: Colors.blue[700],
       type: BottomNavigationBarType.shifting,
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(
-            FontAwesomeIcons.car,
-            size: 20,
+          icon: const SizedBox(
+            child: Icon(
+              FontAwesomeIcons.car,
+            ),
+            width: 38,
+            height: 38,
           ),
           label: 'Bokningar',
           backgroundColor: Colors.blue[700],
-          activeIcon: const Icon(
-            FontAwesomeIcons.carCrash,
+          activeIcon: const SizedBox(
+            child: Icon(
+              FontAwesomeIcons.carCrash,
+            ),
+            width: 38,
+            height: 38,
           ),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            FontAwesomeIcons.stickyNote,
-            size: 20,
+          icon: const SizedBox(
+            child: Icon(
+              FontAwesomeIcons.stickyNote,
+            ),
+            width: 38,
+            height: 38,
           ),
           label: 'Anteckningar',
           backgroundColor: Colors.blue[700],
-          activeIcon: const Icon(
-            FontAwesomeIcons.solidStickyNote,
+          activeIcon: const SizedBox(
+            child: Icon(
+              FontAwesomeIcons.solidStickyNote,
+            ),
+            width: 38,
+            height: 38,
           ),
         ),
         BottomNavigationBarItem(
-          icon: GoogleProfilePicture(url: user!.photoURL!),
+          icon: SizedBox(
+            child: GoogleProfilePicture(url: user!.photoURL!),
+            width: 38,
+            height: 38,
+          ),
           label: 'Profil',
           backgroundColor: Colors.blue[700],
         ),
@@ -68,14 +85,15 @@ class GoogleProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 22,
-      height: 22,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          image: NetworkImage(url),
-          fit: BoxFit.contain,
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: NetworkImage(url),
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     );

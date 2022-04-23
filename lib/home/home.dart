@@ -18,24 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "appBar": AppBar(
         title: const Text("Brum"),
-        // bottom: const TabBar(
-        //   tabs: [
-        //     // Tab(
-        //     //   icon: FaIcon(
-        //     //     FontAwesomeIcons.calendar,
-        //     //     size: 18,
-        //     //   ),
-        //     //   text: 'Kalender',
-        //     // ),
-        //     Tab(
-        //       icon: FaIcon(
-        //         FontAwesomeIcons.list,
-        //         size: 18,
-        //       ),
-        //       text: 'Agenda',
-        //     ),
-        //   ],
-        // ),
       ),
       "body": const CalendarScreen(),
       "floatingActionButton": FloatingActionButton(
@@ -67,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () => AuthService().signOut(),
         backgroundColor: Colors.red[400],
         child: const Icon(Icons.logout),
-        // child: const FaIcon(FontAwesomeIcons.u, size: 22),
       ),
     },
   ];
